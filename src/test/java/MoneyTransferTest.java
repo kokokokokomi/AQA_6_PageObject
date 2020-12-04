@@ -45,4 +45,19 @@ public class MoneyTransferTest {
         val cardBalance = new CardBalanceAddPage();
         cardBalance.transferMoneyError(cardInfo);
     }
+
+    @Test
+    void shouldTransferDoubleAmountBetweenOwnCardsFromFirstToSecond() {
+        TestHelper.openBrowser();
+        TestHelper.sendLogin();
+        val personAccount = new PersonAccountPage();
+        val cardInfo = DataHelper.getCardInfo1();
+        int firstBalance = DataHelper.getOtherBalance();
+        personAccount.validDeposit2();
+        val cardBalance = new CardBalanceAddPage();
+        cardBalance.transferMoneyDoubleAmount(cardInfo);
+        int newBalance = personAccount.returnOtherBalance();
+        int expected = (int) (firstBalance - Double.parseDouble(DataHelper.shouldReturnDoubleAmount()));
+        assertEquals(expected, newBalance);
+    }
 }
