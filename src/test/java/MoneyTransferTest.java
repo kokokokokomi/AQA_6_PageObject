@@ -34,4 +34,15 @@ public class MoneyTransferTest {
         int expected = DataHelper.expectAmount(firstBalance, Integer.parseInt(CardBalanceAddPage.amountTransferred));
         assertEquals(expected, newBalance);
     }
+
+    @Test
+    void shouldMakeErrorWithEmptyField() {
+        TestHelper.openBrowser();
+        TestHelper.sendLogin();
+        val personAccount = new PersonAccountPage();
+        val cardInfo = DataHelper.getCardInfo1();
+        personAccount.validDeposit2();
+        val cardBalance = new CardBalanceAddPage();
+        cardBalance.transferMoneyError(cardInfo);
+    }
 }
