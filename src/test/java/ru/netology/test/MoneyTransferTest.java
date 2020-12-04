@@ -1,6 +1,11 @@
+package ru.netology.test;
+
 import org.junit.jupiter.api.Test;
 import lombok.val;
 import ru.netology.data.*;
+import ru.netology.page.CardBalanceAddPage;
+import ru.netology.page.PersonAccountPage;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTransferTest {

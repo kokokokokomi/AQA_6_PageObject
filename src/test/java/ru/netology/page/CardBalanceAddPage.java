@@ -1,8 +1,9 @@
-package ru.netology.data;
+package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
 import com.codeborne.selenide.Condition;
+import ru.netology.data.DataHelper;
 
 public class CardBalanceAddPage {
     private SelenideElement amountField = $("[data-test-id=amount] input");

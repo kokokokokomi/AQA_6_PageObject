@@ -1,7 +1,10 @@
-package ru.netology.data;
+package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import ru.netology.page.CardBalanceAddPage;
+import ru.netology.page.DashboardPage;
+
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;

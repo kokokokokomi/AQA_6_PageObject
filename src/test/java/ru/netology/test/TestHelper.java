@@ -1,5 +1,8 @@
-package ru.netology.data;
+package ru.netology.test;
 import lombok.val;
+import ru.netology.data.DataHelper;
+import ru.netology.page.LoginPage;
+
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestHelper {

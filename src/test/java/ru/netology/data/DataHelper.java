@@ -1,6 +1,7 @@
 package ru.netology.data;
 
 import lombok.Value;
+import ru.netology.page.PersonAccountPage;
 
 import java.util.Arrays;
 import java.util.List;
