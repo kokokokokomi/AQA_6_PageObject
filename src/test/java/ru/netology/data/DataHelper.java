@@ -56,7 +56,7 @@ public class DataHelper {
         return DataHelper.getCardInfo2().balance;
     }
 
-    public static int getOherBalance() {
+    public static int getOtherBalance() {
         return DataHelper.getCardInfo1().balance;
     }
 
