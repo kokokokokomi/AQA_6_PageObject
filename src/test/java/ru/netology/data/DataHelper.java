@@ -1,5 +1,6 @@
 package ru.netology.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Value;
 import ru.netology.page.PersonAccountPage;
 
@@ -20,6 +21,8 @@ public class DataHelper {
         return new AuthInfo("vasya", "qwerty123");
     }
 
+    public static AuthInfo getOtherAuthInfo(AuthInfo original) { return new AuthInfo("petya", "123qwerty"); }
+
     @Value
     public static class VerificationCode {
         private String code;
@@ -36,11 +39,11 @@ public class DataHelper {
     }
 
     public static CardInfo getCardInfo1() {
-        return new CardInfo("5559_0000_0000_0001", new PersonAccountPage().returnOtherBalance());
+        return new CardInfo("5559_0000_0000_0001", new PersonAccountPage().returnSecondCardInfo());
     }
 
     public static CardInfo getCardInfo2() {
-        return new CardInfo("5559_0000_0000_0002", new PersonAccountPage().returnBalance());
+        return new CardInfo("5559_0000_0000_0002", new PersonAccountPage().returnFirstCardInfo());
     }
 
     public static String shouldReturnRandomAmount() {
@@ -53,15 +56,32 @@ public class DataHelper {
         return "100.10";
     }
 
-    public static int getBalance() {
-        return DataHelper.getCardInfo2().balance;
-    }
-
-    public static int getOtherBalance() {
-        return DataHelper.getCardInfo1().balance;
-    }
-
     public static int expectAmount (int initialAmount, int minusAmount) {
         return initialAmount - minusAmount;
+    }
+
+    @Value
+    @AllArgsConstructor
+    public static class TransferInfo {
+        private String cardNumber;
+        private String startBalance;
+    }
+
+    public static TransferInfo getFirstTransferData() {
+        return new TransferInfo("5559000000000001", "10000");
+    }
+
+    public static TransferInfo getSecondTransferData() {
+        return new TransferInfo("5559000000000002", "10000");
+    }
+
+    public static int getBalanceAfterTransfer(int balanceBefore, int value) {
+        int balanceAfter = balanceBefore - value;
+        return balanceAfter;
+    }
+
+    public static int getBalanceAfterGet(int balanceBefore, int value) {
+        int balanceAfter = balanceBefore + value;
+        return balanceAfter;
     }
 }

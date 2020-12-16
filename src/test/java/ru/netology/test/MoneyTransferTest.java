@@ -1,12 +1,11 @@
 package ru.netology.test;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import lombok.val;
 import ru.netology.data.*;
-import ru.netology.page.CardBalanceAddPage;
-import ru.netology.page.LoginPage;
-import ru.netology.page.PersonAccountPage;
+import ru.netology.page.*;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,10 +28,10 @@ public class MoneyTransferTest {
     void shouldTransferBetweenOwnCardsFromSecondToFirst() {
         val personAccount = new PersonAccountPage();
         val cardInfo = DataHelper.getCardInfo2();
-        val firstBalance = DataHelper.getBalance();
+        val firstBalance = DashboardPage.getFirstCardBalance();
         val cardBalance = personAccount.validDeposit1();
         cardBalance.transferMoney(cardInfo);
-        val newBalance = personAccount.returnBalance();
+        val newBalance = personAccount.returnFirstCardInfo();
         val expected = DataHelper.expectAmount(firstBalance, Integer.parseInt(CardBalanceAddPage.amountTransferred));
         assertEquals(expected, newBalance);
     }
@@ -41,11 +40,11 @@ public class MoneyTransferTest {
     void shouldTransferBetweenOwnCardsFromFirstToSecond() {
         val personAccount = new PersonAccountPage();
         val cardInfo = DataHelper.getCardInfo1();
-        val firstBalance = DataHelper.getOtherBalance();
+        val firstBalance = DashboardPage.getSecondCardBalance();
         personAccount.validDeposit2();
         val cardBalance = new CardBalanceAddPage();
         cardBalance.transferMoney(cardInfo);
-        val newBalance = personAccount.returnOtherBalance();
+        val newBalance = personAccount.returnSecondCardInfo();
         val expected = DataHelper.expectAmount(firstBalance, Integer.parseInt(CardBalanceAddPage.amountTransferred));
         assertEquals(expected, newBalance);
     }
@@ -63,11 +62,11 @@ public class MoneyTransferTest {
     void shouldTransferDoubleAmountBetweenOwnCardsFromFirstToSecond() {
         val personAccount = new PersonAccountPage();
         val cardInfo = DataHelper.getCardInfo1();
-        val firstBalance = DataHelper.getOtherBalance();
+        val firstBalance = DashboardPage.getSecondCardBalance();
         personAccount.validDeposit2();
         val cardBalance = new CardBalanceAddPage();
         cardBalance.transferMoneyDoubleAmount(cardInfo);
-        val newBalance = personAccount.returnOtherBalance();
+        val newBalance = personAccount.returnSecondCardInfo();
         val expected = (int) (firstBalance - Double.parseDouble(DataHelper.shouldReturnDoubleAmount()));
         assertEquals(expected, newBalance);
     }
